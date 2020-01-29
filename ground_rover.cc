@@ -36,6 +36,13 @@ void send_data_rover(){
  //kendall 
 }
 
+void create_checksum(){
+   //if this takes a few lines put here
+   
+   //kendall
+
+}
+
 void check_checksum(){
  //checks checksum from the ack message from rover 
   
