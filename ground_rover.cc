@@ -14,6 +14,7 @@ struct go_car{
 void keyboard_io(){
  //accepts input/output from keyboard
   // ex: if hit up arrow, direction should be forward until stop key is hit
+   // assuming left/right motors have a forward/backward function: left turn: right_side is forward and left_side is backward
  //if super long make translation from io into data its own function 
   
   //nathan
