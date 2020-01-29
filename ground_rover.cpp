@@ -1,16 +1,23 @@
+// include files
+#include <iostream>
+using namespace std;
 
+
+// Data types
 struct go_car{
    //make bytes for each motor/servo (5 total)
   // potentially one byte for checksum
-  std::byte left_side;
-  std::byte right_side;
-  std::byte lift_arm;
-  std::byte ice_hand;
-  std::byte lock;
-  std::byte checksum;
+  char left_side;
+  char right_side;
+  char lift_arm;
+  char ice_hand;
+  char lock;
+  char checksum;
 };
 
 
+
+//Functions 
 void keyboard_io(){
  //accepts input/output from keyboard
   // ex: if hit up arrow, direction should be forward until stop key is hit
@@ -29,17 +36,24 @@ void send_data_radio(){
 }
 
 
-void create_checksum(){
+void create_checksum(go_car car){
    //if this takes a few lines put here
-   
-   //kendall
+   char checksum;
+   checksum = car.left_side ^ car.right_side;
+   checksum ^= car.lift_arm;
+   checksum ^= car.ice_hand;
+   checksum ^= car.lock;
 
+   car.checksum = checksum;
 }
 
-void check_checksum(){
+int check_checksum(go_car car, char ret_checksum){
  //checks checksum from the ack message from rover 
-  
-  //kendall
+  return car.checksum == ret_checksum;
 }
 
 
+
+int main() {
+  
+}
