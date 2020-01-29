@@ -1,7 +1,7 @@
 # 2020-NSL-Groundstation
 
 ## Overview 
-two driver servos
+two driver motors
 
 two servos to lift up the ice 
 
