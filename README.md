@@ -71,6 +71,9 @@ Interface to control
 Questions
 	• When we send data is it just power on or off or is there a speed (like 20% or something)
 		○ i.e. what form is easiest
+		
+	* does the left/right side motors have a forward/backward function?
+		* -> for turning is it easier to have right side forward or right side forward and left side backward for turning left
 
 
 	
