@@ -1,11 +1,12 @@
 
 struct go_car{
-   //make bytes for each motor (4 total)
+   //make bytes for each motor/servo (5 total)
   // potentially one byte for checksum
   std::byte left_side;
   std::byte right_side;
-  std::byte lift_ice_1;
-  std::byte lift_ice_2;
+  std::byte lift_arm;
+  std::byte ice_hand;
+  std::byte lock;
   std::byte checksum;
 };
 
