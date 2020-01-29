@@ -42,16 +42,16 @@ limitations - loar radios have low bandwidth
 
 ### Structure of code
 Functions
-	• Accepting in/out from keyboard (or mouse button later if interface has buttons)
-		○ Ex: hit the up arrow key direction should be forward
-		○ Ex: press a button to increase speed (?)
-	• Sending the data to the serial radio
-		○ Should be continuously sending things
-			§ If no change send previous message
-	• Serial radio
-		○ Should send the data to the car
-	• Check the checksum?
-		○ Check the checksum received from rover as confirm for previous message. 
+* Accepting in/out from keyboard (or mouse button later if interface has buttons)
+	* Ex: hit the up arrow key direction should be forward
+	* Ex: press a button to increase speed (?)
+* Sending the data to the serial radio
+	* Should be continuously sending things
+		* If no change send previous message
+* Serial radio
+	* Should send the data to the car
+* Check the checksum?
+	○ Check the checksum received from rover as confirm for previous message. 
 
 
 Structures
