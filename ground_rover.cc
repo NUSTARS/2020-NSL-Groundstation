@@ -13,7 +13,7 @@ struct go_car{
 
 void keyboard_io(){
  //accepts input/output from keyboard
-  // ex: if hit up arrow, direction should be forward
+  // ex: if hit up arrow, direction should be forward until stop key is hit
  //if super long make translation from io into data its own function 
   
   //nathan
