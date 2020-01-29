@@ -1,7 +1,12 @@
 // include files
+#include "SerialPort.h"
 #include <iostream>
+#include <string>
+//#include "SerialPort.cpp"
 using namespace std;
 
+// macros
+#define DATA_LENGTH 255
 
 // Data types
 struct go_car{
@@ -17,6 +22,7 @@ struct go_car{
 
 
 
+
 //Functions 
 void keyboard_io(){
  //accepts input/output from keyboard
@@ -27,17 +33,37 @@ void keyboard_io(){
   //nathan
 }
 
+void arduino_connect(SerialPort* arduino, char* port_name){
+  // connecting
+  arduino = new SerialPort(port_name);
+  cout << "is connected: " << arduino->isConnected() << endl;
 
+}
 
-void send_data_radio(){
+void send_data(SerialPort* arduino){
  //send the data to the serial radio
   //optionally create a checksum
-  //kendall
+  string test = "hello world\n";
+  if (arduino->isConnected()){
+    bool has_written = arduino->writeSerialPort(test, DATA_LENGTH);
+    if (has_written){
+      cout << "Data written successfully" << endl;
+    }
+    else {
+      cout << "Data was not written" << endl;
+    }
+  }
+}
+
+void recv_data(){
+ //send the data to the serial radio
+  //optionally create a checksum
+  
 }
 
 
+
 void create_checksum(go_car car){
-   //if this takes a few lines put here
    char checksum;
    checksum = car.left_side ^ car.right_side;
    checksum ^= car.lift_arm;
@@ -53,7 +79,20 @@ int check_checksum(go_car car, char ret_checksum){
 }
 
 
-
-int main() {
+int main(){
+  // Global Variables
+  char* port_name"\\\\.\\COM20";
+  SerialPort *arduino;
   
+  //connecting to arduino
+  arduino_connect(SerialPort* arduino, char* port_name);
+
+  // for testing can make it end
+  while(1)
+  {
+    
+  }
+
 }
+
+
