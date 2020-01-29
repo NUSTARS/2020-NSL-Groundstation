@@ -29,13 +29,6 @@ void send_data_radio(){
 }
 
 
-void send_data_rover(){
- //see foundation code from last year
-  // might not be in c++
-  //sends data from radio to car
- //kendall 
-}
-
 void create_checksum(){
    //if this takes a few lines put here
    
