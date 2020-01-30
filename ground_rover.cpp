@@ -33,15 +33,14 @@ struct go_car{
 };
 
 
-void keyboard_io(go_car vroom){
+void keyboard_io(go_car vroom, int c){
  //accepts input/output from keyboard
   // ex: if hit up arrow, direction should be forward until stop key is hit
    // assuming left/right motors have a forward/backward function: left turn: right_side is forward and left_side is backward
  //if super long make translation from io into data its own function 
         // c=getchar();
         // putchar(c);
-    int c;
-    switch(c=getch()) {
+    switch(c) {
         case KEY_UP:
             vroom.right_side = FORWARD_UP;
             vroom.left_side = FORWARD_UP;
@@ -83,7 +82,11 @@ void keyboard_io(go_car vroom){
             printw("Unlock\n");
             break;
         default:
-            printw("beep\n");
+            vroom.left_side = 0x0;
+            vroom.right_side = 0x0;
+            vroom.lift_arm = 0x0;
+            vroom.ice_hand = 0x0;
+            // printw("Stop\n"); // prints every time button not being pressed, so commented out
             break;
     }
 
@@ -114,21 +117,25 @@ void check_checksum(){
 
 int main() {
     // MUST INCLUDE these lines to set up curses.h
-    initscr();
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
+    initscr(); // initializes ncurses
+    cbreak(); // disables buffering, takes char-at-a-time input
+    noecho(); // suppress auto echoing of typed chars
+    keypad(stdscr, TRUE); // allows us to capture special key strokes (arrow keys)
+    nodelay(stdscr, TRUE); // does not pause program to wait for typed char
+    scrollok(stdscr, TRUE); // window will scroll when full
 
     go_car car;
+    int c;
     // LOOP:
-    while (1) {
-        keyboard_io(car);
+    do {
+        c = getch();
+        keyboard_io(car, c);
 
         // ... rest of loop ...
-    }
+    } while (c != '9'); // Pressing '9' ends the loop
 
     // MUST INCLUDE this to return control to terminal
-    endwin();
+    endwin(); // restores terminal settings
 
     return 0;
 }
