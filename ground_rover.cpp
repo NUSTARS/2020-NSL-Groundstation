@@ -33,7 +33,7 @@ struct go_car{
 };
 
 
-void keyboard_io(go_car vroom, int c){
+void keyboard_io(go_car &car, int c){
  //accepts input/output from keyboard
   // ex: if hit up arrow, direction should be forward until stop key is hit
    // assuming left/right motors have a forward/backward function: left turn: right_side is forward and left_side is backward
@@ -42,50 +42,50 @@ void keyboard_io(go_car vroom, int c){
         // putchar(c);
     switch(c) {
         case KEY_UP:
-            vroom.right_side = FORWARD_UP;
-            vroom.left_side = FORWARD_UP;
+            car.right_side = FORWARD_UP;
+            car.left_side = FORWARD_UP;
             printw("Up\n");
             break;
         case KEY_DOWN:
-            vroom.right_side = BACKWARD_DOWN;
-            vroom.left_side = BACKWARD_DOWN;
+            car.right_side = BACKWARD_DOWN;
+            car.left_side = BACKWARD_DOWN;
             printw("Down\n");
             break;
         case KEY_LEFT:
-            vroom.right_side = FORWARD_UP;
-            vroom.left_side = BACKWARD_DOWN;
+            car.right_side = FORWARD_UP;
+            car.left_side = BACKWARD_DOWN;
             printw("Left\n");
             break;
         case KEY_RIGHT:
-            vroom.left_side = FORWARD_UP;
-            vroom.right_side = BACKWARD_DOWN;
+            car.left_side = FORWARD_UP;
+            car.right_side = BACKWARD_DOWN;
             printw("Right\n");
             break;
         case ARM_UP:
-            vroom.lift_arm = FORWARD_UP;
+            car.lift_arm = FORWARD_UP;
             printw("Arm Up\n");
             break;
         case ARM_DOWN:
-            vroom.lift_arm = BACKWARD_DOWN;
+            car.lift_arm = BACKWARD_DOWN;
             printw("Arm Down\n");
             break;
         case HAND_UP:
-            vroom.ice_hand = FORWARD_UP;
+            car.ice_hand = FORWARD_UP;
             printw("Hand Up\n");
             break;
         case HAND_DOWN:
-            vroom.ice_hand = BACKWARD_DOWN;
+            car.ice_hand = BACKWARD_DOWN;
             printw("Hand Down\n");
             break;
         case UNLOCK:
-            vroom.lock = 0x1;
+            car.lock = 0x1;
             printw("Unlock\n");
             break;
         default:
-            vroom.left_side = 0x0;
-            vroom.right_side = 0x0;
-            vroom.lift_arm = 0x0;
-            vroom.ice_hand = 0x0;
+            car.left_side = 0x0;
+            car.right_side = 0x0;
+            car.lift_arm = 0x0;
+            car.ice_hand = 0x0;
             // printw("Stop\n"); // prints every time button not being pressed, so commented out
             break;
     }
