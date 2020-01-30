@@ -128,7 +128,7 @@ int main() {
     int c;
     // LOOP:
     do {
-        c = getch();
+        c = getch(); // gets keyboard input
         keyboard_io(car, c);
 
         // ... rest of loop ...
