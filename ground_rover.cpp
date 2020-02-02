@@ -1,6 +1,10 @@
+// include files
+#include "SerialPort.h"
 #include <iostream>
+#include <string>
 #include <cstddef>
 #include <ncurses.h>
+//#include "SerialPort.cpp"
 using namespace std;
 
 // IMPORTANT:
@@ -8,6 +12,8 @@ using namespace std;
 //          g++ -lncurses ground_rover.cpp -o ground_rover
 // to link ncurses.h
 
+// macros
+#define DATA_LENGTH 255
 #define ARM_UP 119          // 'w'
 #define ARM_DOWN 115        // 's'
 #define HAND_UP 114         // 'r'
@@ -33,11 +39,52 @@ struct go_car{
 };
 
 
-void keyboard_io(go_car &car, int c){
- //accepts input/output from keyboard
-  // ex: if hit up arrow, direction should be forward until stop key is hit
-   // assuming left/right motors have a forward/backward function: left turn: right_side is forward and left_side is backward
- //if super long make translation from io into data its own function 
+
+void arduino_connect(SerialPort* arduino, char* port_name){
+  // connecting
+  arduino = new SerialPort(port_name);
+  cout << "is connected: " << arduino->isConnected() << endl;
+
+}
+
+void send_data(SerialPort* arduino){
+ //send the data to the serial radio
+  //optionally create a checksum
+  string test = "hello world\n";
+  if (arduino->isConnected()){
+    bool has_written = arduino->writeSerialPort(test, DATA_LENGTH);
+    if (has_written){
+      cout << "Data written successfully" << endl;
+    }
+    else {
+      cout << "Data was not written" << endl;
+    }
+  }
+}
+
+void recv_data(){
+ //send the data to the serial radio
+  //optionally create a checksum
+  
+}
+
+
+void create_checksum(go_car car){
+   char checksum;
+   checksum = car.left_side ^ car.right_side;
+   checksum ^= car.lift_arm;
+   checksum ^= car.ice_hand;
+   checksum ^= car.lock;
+
+   car.checksum = checksum;
+}
+
+int check_checksum(go_car car, char ret_checksum){
+ //checks checksum from the ack message from rover 
+  return car.checksum == ret_checksum;
+}
+
+void keyboardio(go_car car, int c) {
         // c=getchar();
         // putchar(c);
     switch(c) {
@@ -94,27 +141,6 @@ void keyboard_io(go_car &car, int c){
 }
 
 
-
-void send_data_radio(){
- //send the data to the serial radio
-  //optionally create a checksum
-  //kendall
-}
-
-
-void create_checksum(){
-   //if this takes a few lines put here
-   
-   //kendall
-
-}
-
-void check_checksum(){
- //checks checksum from the ack message from rover 
-  
-  //kendall
-}
-
 int main() {
     // MUST INCLUDE these lines to set up curses.h
     initscr(); // initializes ncurses
@@ -123,6 +149,13 @@ int main() {
     keypad(stdscr, TRUE); // allows us to capture special key strokes (arrow keys)
     nodelay(stdscr, TRUE); // does not pause program to wait for typed char
     scrollok(stdscr, TRUE); // window will scroll when full
+  
+    // Global Variables
+    char* port_name"\\\\.\\COM20";
+    SerialPort *arduino;
+
+    //connecting to arduino
+    arduino_connect(SerialPort* arduino, char* port_name);
 
     go_car car;
     int c;
