@@ -90,6 +90,9 @@ int main(){
   // for testing can make it end
   while(1)
   {
+    // check keyboard
+
+    //send data to radio
     
   }
 
