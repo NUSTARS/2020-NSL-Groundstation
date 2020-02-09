@@ -6,9 +6,9 @@ two driver motors
 two servos to lift up the ice 
 
 limitations - loar radios have low bandwidth
-	bytes per second
-	scheme as small as possible, b/c amount of time block reading radio is proportional to length of packet, bit operations
-	own data scheme for floating points
+* bytes per second
+* scheme as small as possible, b/c amount of time block reading radio is proportional to length of packet, bit operations
+* own data scheme for floating points
 		fixed point
 	interface -analog stick, two vals, stop turn and then go forward, -1 and 1 vals for input
 	
