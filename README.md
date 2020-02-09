@@ -64,7 +64,9 @@ Interface to control
 		○ Has indication of if connection exists
 	• Maybe print a message when change occurs and when rover confirms change
 	
-
+	
+## Parts
+* Hardware to communicate from groundstation to rover - Feather m0 rfm95w
 
 
 ## For next meeting
