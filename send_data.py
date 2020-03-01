@@ -3,6 +3,8 @@ import time
 
 port = "COM4"
 baud = 9600
+correct_pw = 0
+password = "hello"
 
 def connect(port, baud):
     try:
@@ -23,7 +25,7 @@ def is_connected(ser):
         return 0
 
 def send_data(ser, data):
-    if is_connected:
+    if is_connected(ser):
         ser.write(data)
 
 def recv_data(ser):
@@ -34,16 +36,32 @@ def recv_data(ser):
         return None
     return data
 
+def req_pw(ser):
+    data = "Password Check"
+    if is_connected(ser):
+        ser.write(data)
+
+def sec_check(ser):
+
 def main():
-    
-    while(not connect(port, baud)):
+    ser = connect(port, baud)
+    while(not ser):
         time.sleep(5)
+        ser = connect(port, baud)
         print("Trying to Connect")
     
     while(True):
-        send_data(ser, data)
-        recv_data(ser)
-    print("Connected.")
+        if not correct_pw:
+            req_pw(ser)
+            pw_resp = recv_data(ser)
+            if pw_resp == password:
+                correct_pw = 1
+
+        else:
+            send_data(ser, data)
+            data = recv_data(ser)
+        time.sleep(2)
+    print("Connected")
     
 
 
