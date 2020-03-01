@@ -58,8 +58,9 @@ def main():
                 correct_pw = 1
 
         else:
-            send_data(ser, data)
-            data = recv_data(ser)
+            controller_inputs = "hello"
+            send_data(ser, controller_inputs)
+            controller_resp = recv_data(ser)
         time.sleep(2)
     print("Connected")
     
