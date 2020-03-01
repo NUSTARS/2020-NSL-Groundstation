@@ -62,9 +62,22 @@ void send_data(SerialPort* arduino){
   }
 }
 
-void recv_data(){
+void recv_data(SerialPort* arduino){
  //send the data to the serial radio
   //optionally create a checksum
+  char received_string[DATA_LENGTH]
+
+  if(arduino->isConnected()){
+    int has_read = arduino->readSerialPort(received_string, DATA_LENGTH);
+    if (has_read){
+      cout <<  receivedString << "\n";
+    }
+    else{
+      cout << "Didn't Receive String\n"; 
+    }
+  }
+
+
   
 }
 
@@ -84,7 +97,7 @@ int check_checksum(go_car car, char ret_checksum){
   return car.checksum == ret_checksum;
 }
 
-void keyboardio(go_car car, int c) {
+void keyboard_io(go_car car, int c) {
         // c=getchar();
         // putchar(c);
     switch(c) {
@@ -156,6 +169,9 @@ int main() {
 
     //connecting to arduino
     arduino_connect(SerialPort* arduino, char* port_name);
+
+    //test 
+    send_data(arduino);
 
     go_car car;
     int c;
