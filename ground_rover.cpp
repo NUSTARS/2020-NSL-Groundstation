@@ -4,7 +4,7 @@
 #include <string>
 #include <cstddef>
 #include <ncurses.h>
-//#include "SerialPort.cpp"
+#include "SerialPort.cpp"
 using namespace std;
 
 // IMPORTANT:
@@ -164,11 +164,11 @@ int main() {
     scrollok(stdscr, TRUE); // window will scroll when full
   
     // Global Variables
-    char* port_name"\\\\.\\COM20";
+    char* port_name = "\\\\.\\COM20";
     SerialPort *arduino;
 
     //connecting to arduino
-    arduino_connect(SerialPort* arduino, char* port_name);
+    arduino_connect(arduino, port_name);
 
     //test 
     send_data(arduino);

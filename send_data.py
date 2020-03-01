@@ -41,7 +41,6 @@ def req_pw(ser):
     if is_connected(ser):
         ser.write(data)
 
-def sec_check(ser):
 
 def main():
     ser = connect(port, baud)
@@ -58,7 +57,8 @@ def main():
                 correct_pw = 1
 
         else:
-            controller_inputs = "hello"
+            # TODO: hook up API and make controller_inputs get the information for how to control the robot
+            controller_inputs = "temp data"
             send_data(ser, controller_inputs)
             controller_resp = recv_data(ser)
         time.sleep(2)
