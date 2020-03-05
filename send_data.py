@@ -41,8 +41,6 @@ def req_pw(ser):
     if is_connected(ser):
         ser.write(data)
 
-def sec_check(ser):
-
 def main():
     ser = connect(port, baud)
     while(not ser):
@@ -58,6 +56,7 @@ def main():
                 correct_pw = 1
 
         else:
+            # TODO: hook up with C++ and set controller_inputs to transmitted data from c++
             controller_inputs = "hello"
             send_data(ser, controller_inputs)
             controller_resp = recv_data(ser)

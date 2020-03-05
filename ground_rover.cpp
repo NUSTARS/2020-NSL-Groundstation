@@ -4,6 +4,7 @@
 #include <string>
 #include <cstddef>
 #include <ncurses.h>
+#include <Python.h>
 //#include "SerialPort.cpp"
 using namespace std;
 
@@ -37,49 +38,6 @@ struct go_car{
   char lock;
   char checksum;
 };
-
-
-
-void arduino_connect(SerialPort* arduino, char* port_name){
-  // connecting
-  arduino = new SerialPort(port_name);
-  cout << "is connected: " << arduino->isConnected() << endl;
-
-}
-
-void send_data(SerialPort* arduino){
- //send the data to the serial radio
-  //optionally create a checksum
-  string test = "hello world\n";
-  if (arduino->isConnected()){
-    bool has_written = arduino->writeSerialPort(test, DATA_LENGTH);
-    if (has_written){
-      cout << "Data written successfully" << endl;
-    }
-    else {
-      cout << "Data was not written" << endl;
-    }
-  }
-}
-
-void recv_data(SerialPort* arduino){
- //send the data to the serial radio
-  //optionally create a checksum
-  char received_string[DATA_LENGTH]
-
-  if(arduino->isConnected()){
-    int has_read = arduino->readSerialPort(received_string, DATA_LENGTH);
-    if (has_read){
-      cout <<  receivedString << "\n";
-    }
-    else{
-      cout << "Didn't Receive String\n"; 
-    }
-  }
-
-
-  
-}
 
 
 void create_checksum(go_car car){
@@ -153,6 +111,11 @@ void keyboard_io(go_car car, int c) {
   //nathan
 }
 
+void send_to_serial(go_car car){
+  // to do
+  return;
+}
+
 
 int main() {
     // MUST INCLUDE these lines to set up curses.h
@@ -163,16 +126,6 @@ int main() {
     nodelay(stdscr, TRUE); // does not pause program to wait for typed char
     scrollok(stdscr, TRUE); // window will scroll when full
   
-    // Global Variables
-    char* port_name"\\\\.\\COM20";
-    SerialPort *arduino;
-
-    //connecting to arduino
-    arduino_connect(SerialPort* arduino, char* port_name);
-
-    //test 
-    send_data(arduino);
-
     go_car car;
     int c;
     // LOOP:
@@ -180,6 +133,7 @@ int main() {
         c = getch(); // gets keyboard input
         keyboard_io(car, c);
 
+        send_to_serial(car);
         // ... rest of loop ...
     } while (c != '9'); // Pressing '9' ends the loop
 
