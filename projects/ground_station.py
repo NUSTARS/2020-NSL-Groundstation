@@ -6,7 +6,8 @@ ARM_DOWN = 115        # 's'
 HAND_UP = 114         # 'r'
 HAND_DOWN = 102       # 'f
 UNLOCK =  117          # 'u'
-FORWARD_UP = 0x1      # 0000 0001
+                        # 3/13: change to one on/off bit and one forward/backward bit
+FORWARD_UP = 0x3      # 0000 0011
 BACKWARD_DOWN  = 0x2   # 0000 0010
 PASSWORD = "hello"
 

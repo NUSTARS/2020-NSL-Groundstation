@@ -6,7 +6,8 @@
 #include <ncurses.h>
 #include <curses.h>
 // NOTE: MAY NEED TO CHANGE YOUR PATH TO WHERE Python.h IS INCLUDED
-#include <C:\cygwin64\usr\include\python3.6m\Python.h>
+// #include <C:\cygwin64\usr\include\python3.6m\Python.h>
+#include </Library/Frameworks/Python.framework/Versions/3.6/include/python3.6m/Python.h>
 // #include <C:\users\Kendall Kuzminskas\appdata\local\programs\python\python36\include\Python.h>
 //#include "SerialPort.cpp"
 using namespace std;
@@ -23,7 +24,8 @@ using namespace std;
 #define HAND_UP 114         // 'r'
 #define HAND_DOWN 102       // 'f
 #define UNLOCK 117          // 'u'
-#define FORWARD_UP 0x1      // 0000 0001
+                            // 3/13: change to one on/off bit and one forward/backward bit
+#define FORWARD_UP 0x3      // 0000 0011
 #define BACKWARD_DOWN 0x2   // 0000 0010
 
 struct go_car{
@@ -34,6 +36,10 @@ struct go_car{
 
   // move motor forward: 0000 0001
   // move motor backwards: 0000 0010
+
+  // motor off: 0000 0000
+  // motor on/forward: 0000 0011
+  // motor on/backward: 0000 0010
   char left_side;
   char right_side;
   char lift_arm;
@@ -120,11 +126,15 @@ int send_to_serial(go_car car){
     PyObject *pName, *pModule, *pDict, *pFunc;
     PyObject *pArgs, *pValue, *pGlobals;
     // to do
-    pName = PyUnicode_FromString("send_data");
+    // pName = PyUnicode_FromString("send_data");
+    
+        // pName = PyUnicode_FromString("send_data");
+    // pName =  "send_data";//_PyString_FromString("send_data");
         /* Error checking of pName left out */
 
-    pModule = PyImport_Import(pName);
-    Py_DECREF(pName);
+    // pModule = PyImport_Import(pName);
+    // Py_DECREF(pName);
+    pModule = PyImport_ImportModule("send_data");
 
     if (pModule != NULL) {
         pFunc = PyObject_GetAttrString(pModule, "run_func");
