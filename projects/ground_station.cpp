@@ -32,10 +32,7 @@ struct go_car{
    //make bytes for each motor/servo (5 total)
   // potentially one byte for checksum
   // maybe can combine left_side and right_side into one byte
-  //      two bits each: 1 move forward, 1 move backwards
-
-  // move motor forward: 0000 0001
-  // move motor backwards: 0000 0010
+  //      two bits each: 1 on/off, 1 move forward/backward
 
   // motor off: 0000 0000
   // motor on/forward: 0000 0011
